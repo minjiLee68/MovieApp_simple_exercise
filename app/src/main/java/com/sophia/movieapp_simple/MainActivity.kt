@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         setUpRv()
 
@@ -31,10 +32,19 @@ class MainActivity : AppCompatActivity() {
 
         binding.recyclerView.apply {
             adapter = tvShowAdapter
-            layoutManager = LinearLayoutManager(
-                this@MainActivity, LinearLayoutManager.HORIZONTAL,
-                false)
+            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+        }
 
+        binding.rvEpisodes.apply {
+            adapter = tvShowAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+        }
+
+        binding.rvRecentlyAdded.apply {
+            adapter = tvShowAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
         }
         viewModel.responseTvShow.observe(this, { listTvShows ->
